@@ -4,13 +4,22 @@ require_once("../hiroes_Website/Config/Database.php");
 require_once("../hiroes_Website/Config/adminLoginLogic.php");
 require_once("../hiroes_Website/Config/justSomeFunction.php");
 
-
+if (isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] === true) {
+    header("Location: serviceForm.php");
+    exit();
+}
 
 
 if (isset($_POST["signInBtnSbmt"])) {
     $loginObj = loginUser($_POST);
+
     if ($loginObj["status"] == "success") {
-        header("Location: serviceForm.php");
+        $_SESSION["admin_logged_in"] = true;
+        $_SESSION["admin_username"] = $_POST["username"];
+
+        swalToast($loginObj["status"], $loginObj["message"], "serviceForm.php" );
+    } else {
+        swalToast($loginObj["status"], $loginObj["message"] );
     }
 }
 ?>
@@ -48,7 +57,7 @@ if (isset($_POST["signInBtnSbmt"])) {
             <div class="col-md-6">
                 <div class="form-container">
                     <h4 class="text-start mb-3">Admin Login</h4>
-                    <form id="loginForm">
+                    <form id="loginForm" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" required>
@@ -57,7 +66,8 @@ if (isset($_POST["signInBtnSbmt"])) {
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" required>
                         </div>
-                        <button type="submit" name="signInBtnSbmt" class="btn btn-primary w-100" id="loginBtn" disabled>Login</button>
+                        <button type="submit" name="signInBtnSbmt" class="btn btn-primary w-100" id="loginBtn"
+                            disabled>Login</button>
                     </form>
                 </div>
             </div>
@@ -88,6 +98,8 @@ if (isset($_POST["signInBtnSbmt"])) {
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

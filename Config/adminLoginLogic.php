@@ -1,6 +1,5 @@
 <?php
 require_once("../hiroes_Website/Config/Database.php");
-session_start();
 function loginUser($POST)
 {
     $db = new Database(); // Create instance
@@ -11,8 +10,12 @@ function loginUser($POST)
     $sql = ""; // will write the sql later
 
     if ($stmt = mysqli_prepare($dbCon, $sql)) {
+
+        
         mysqli_stmt_bind_param($stmt, "s", $POST["username"]);
+
         mysqli_stmt_execute($stmt);
+        
         $result = mysqli_stmt_get_result($stmt);
 
         if ($result && mysqli_num_rows($result) > 0) {

@@ -1,11 +1,11 @@
 <?php
-// session_start();  // ✅ Start session
+session_start();  // ✅ Start session
 
-// // Redirect if user is not logged in
-// if (!isset($_SESSION["adminEmail"])) {
-//     header("Location: adminLoginForm.php");
-//     exit();
-// }
+// Redirect if user is not logged in
+if (!isset($_SESSION["adminEmail"])) {
+    header("Location: adminLoginForm.php");
+    exit();
+}
 ?>
 
 
