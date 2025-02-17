@@ -2,7 +2,7 @@
 session_start();  // ✅ Start session
 
 // Redirect if user is not logged in
-if (!isset($_SESSION["adminEmail"])) {
+if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true) {
     header("Location: adminLoginForm.php");
     exit();
 }
@@ -38,6 +38,7 @@ if (!isset($_SESSION["adminEmail"])) {
 
 <body>
     <div class="container">
+    <a class="btn btn-primary w-100" href="../hiroes_Website/Config/logout.php">Logout</a>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="form-container">
@@ -73,6 +74,7 @@ if (!isset($_SESSION["adminEmail"])) {
                             <input type="text" class="form-control" id="price" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
+                        
                     </form>
                 </div>
             </div>
