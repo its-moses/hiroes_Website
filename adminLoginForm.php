@@ -19,7 +19,7 @@ if (isset($_POST["signInBtnSbmt"])) {
 
         swalToast($loginObj["status"], $loginObj["message"], "serviceForm.php" );
     } else {
-        swalToast($loginObj["status"], $loginObj["message"] );
+        swalToast($loginObj["status"], $loginObj["message"] , $_SERVER['REQUEST_URI']);
     }
 }
 ?>
