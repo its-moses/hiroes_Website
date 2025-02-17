@@ -1,8 +1,14 @@
 <?php
 require_once("./Config/connect-admin.php");
 
+// Prevent browser caching (Important for Back button behavior)
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Expire page immediately
+
 // Redirect if user is not logged in
-if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true) {
+if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true) {
     header("Location: adminLoginForm.php");
     exit();
 }
@@ -100,6 +106,11 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             alert('Form submitted successfully!');
+        });
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                location.reload();
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
