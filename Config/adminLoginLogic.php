@@ -10,7 +10,9 @@ function loginUser($POST)
 
     if ($stmt = mysqli_prepare($dbCon, $sql)) {
 
-        mysqli_stmt_bind_param($stmt, "s", $POST["username"]);
+        $username = trim($POST["username"]);
+
+        mysqli_stmt_bind_param($stmt, "s", $username);
 
         mysqli_stmt_execute($stmt);
 
@@ -33,7 +35,8 @@ function loginUser($POST)
         } else {
             $returnData = [
                 "status" => "warning",
-                "message" => "Invalid Credentials, Try again...!"
+                "message" => "Invalid Credentials, Try again...!",
+                "sql" => $sql
             ];
         }
 

@@ -35,10 +35,7 @@ if (isset($_POST["signInBtnSbmt"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hiroes - Admin Login</title>
     <!-- Load jQuery first -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Load SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -108,6 +105,9 @@ if (isset($_POST["signInBtnSbmt"])) {
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Load SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

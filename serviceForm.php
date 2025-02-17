@@ -1,5 +1,5 @@
 <?php
-session_start();  // ✅ Start session
+require_once("./Config/connect-admin.php");
 
 // Redirect if user is not logged in
 if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true) {
@@ -38,16 +38,14 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true
 
 <body>
     <div class="container">
-    <a class="btn btn-primary w-100" href="../hiroes_Website/Config/logout.php">Logout</a>
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <a class="btn btn-primary w-100" href="../hiroes_Website/Config/logout.php">Logout</a>
                 <div class="form-container">
                     <h4 class="text-start">Admin Service Form</h4>
+
+
                     <form id="serviceForm">
-                        <div class="mb-3">
-                            <label for="serviceId" class="form-label">Service ID</label>
-                            <input type="number" class="form-control" id="serviceId" required>
-                        </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <select class="form-select" id="category" required>
@@ -74,7 +72,7 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] != true
                             <input type="text" class="form-control" id="price" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
-                        
+
                     </form>
                 </div>
             </div>
