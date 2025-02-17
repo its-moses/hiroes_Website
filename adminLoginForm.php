@@ -49,6 +49,7 @@ if (isset($_POST["signInBtnSbmt"])) {
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -60,11 +61,11 @@ if (isset($_POST["signInBtnSbmt"])) {
                     <form id="loginForm" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" required>
+                            <input type="text" name="username" class="form-control" id="username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" required>
+                            <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <button type="submit" name="signInBtnSbmt" class="btn btn-primary w-100" id="loginBtn"
                             disabled>Login</button>
@@ -97,8 +98,7 @@ if (isset($_POST["signInBtnSbmt"])) {
             alert('Login successful!');
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 

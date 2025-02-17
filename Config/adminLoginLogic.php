@@ -6,26 +6,22 @@ function loginUser($POST)
     $dbCon = $db->getConnection(); // Get mysqli connection
     $returnData = [];
 
-    // SQL Query to check credentials
-    $sql = ""; // will write the sql later
+    $sql = "SELECT * FROM admin_table WHERE admin_user = ?";
 
     if ($stmt = mysqli_prepare($dbCon, $sql)) {
 
-        
         mysqli_stmt_bind_param($stmt, "s", $POST["username"]);
 
         mysqli_stmt_execute($stmt);
-        
+
         $result = mysqli_stmt_get_result($stmt);
 
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-
-            // Check if password matches (not hashed)
-            if ($POST["password"] == $row["fldAdminPassword"]) {
+        if ($row = mysqli_fetch_assoc($result)) { // Fetch user row
+            
+            if ($POST["password"] == $row["admin_pass"]) {
                 $returnData = [
                     "status" => "success",
-                    "message" => "Login successful"
+                    "message" => "Login successful",
                 ];
             } else {
                 $returnData = [
@@ -33,6 +29,7 @@ function loginUser($POST)
                     "message" => "Invalid Password, Try again...!"
                 ];
             }
+
         } else {
             $returnData = [
                 "status" => "warning",
@@ -40,13 +37,15 @@ function loginUser($POST)
             ];
         }
 
+        // Close statement
         mysqli_stmt_close($stmt);
     } else {
         $returnData = [
-            "status" => "warning",
+            "status" => "error",
             "message" => "Something went wrong, Try again...!"
         ];
     }
 
     return $returnData;
 }
+
