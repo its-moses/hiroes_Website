@@ -3,7 +3,7 @@ class Database
 {
     private $dbCon;
     private $host = "localhost";
-    private $dbname = "your_database";
+    private $dbname = "hiroesdb";
     private $user = "root";
     private $pass = "";
 
