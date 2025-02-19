@@ -286,7 +286,6 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                                                                 <td class="col-4 d-none d-lg-block w-100">${value.category_name}</td>
                                                                 <td>${value.price}</td>
                                                                 <td>${value.status}</td>
-                                                        <td>${value.service_description}</td>
                                                     </tr>`;
                         })
                         $("#servicebody").append(servicebody)
@@ -529,6 +528,41 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                 }
             });
         });
+
+        function categoryTable() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    act: 'category_table',
+                },
+                url: 'apis/category-data.php',
+                beforeSend: function() {
+                    $("#categorybody").html('')
+
+                },
+                success: function(response) {
+                    if (response.status) {
+                        let responseObj = response.data;
+                        let categorybody = ""
+                        $.each(responseObj, function(index, value) {
+
+                            let visibility = value.visibility === "show" ? "Website Live" : "Not Live";
+
+                            categorybody += `<tr>
+                            <th scope="row">${value.category_name}<a href="#"
+                                    class="link-secondary px-2 text-decoration-none" data-categoryid=${value.category_id}>👁️</a></th>
+                            <td>${value.service_count}</td>
+                            <td>${visibility}</td>
+                        </tr>`;
+                        })
+                        $("#categorybody").append(categorybody)
+                    }
+                }
+            })
+        }
+
+        categoryTable()
     })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
