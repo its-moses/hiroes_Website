@@ -7,7 +7,12 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>Publiccccc</title>
 </head>
-
+<style>
+      @font-face {
+    font-family: 'LucideIcons';
+    src: url(https://unpkg.com/lucide-static@latest/font/Lucide.ttf) format('truetype');
+  }
+</style>
 <body class="bg-slate-0">
     <div class="main">
         <div id="global_padding" class="px-4 sm:px-8 md:px-16">
@@ -27,7 +32,8 @@
                                 </div>
                                 <div class="flex gap-3">
                                     <a href="#"
-                                        class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-lg font-medium py-4 px-6 rounded">Find
+                                        class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-lg font-medium py-4 px-6 rounded">
+                                        <div class="anvil"></div>Find
                                         Services</a>
                                     <a href="#"
                                         class="bg-slate-0 hover:bg-slate-200 border-solid border-1 border-slate-200 text-black text-lg font-medium py-4 px-6 rounded">Learn
@@ -44,10 +50,27 @@
                 
                 <section>
                     <div class="pt-20 pb-32">
+                        <div class="hiroes_content_s1 max-w-2xl pt-10">
+                            <div>
+                                <h2 class="text-4xl font-bold leading-[1.1] mb-4">Explore Services & Prices</h2>
+                                <p class="text-2xl leading-[1.5]">Hiroes offer a wide range of at-home service
+                                    categories for your household and lifestyle needs.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row gap-2 overflow-x-auto text-nowrap mt-8 mb-16">
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Available</a>
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Handyman & Repair</a>
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Appliances</a>
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Maintenance</a>
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Self Care & Wellness</a>
+                                <a href="#" class="text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 hover:bg-slate-100 text-slate-900 hover:text-slate-50">Party & Event</a>
+                        </div>
+
                         <!-- FAQ Accordion Container -->
                         <div class="space-y-2">
+
                             <!-- COMPONENT -->
-                            <div class="border border-slate-100 rounded-lg overflow-hidden shadow-md p-1 space-y-1">
+                            <div class="hiroes-accordion border border-slate-100 rounded-lg overflow-hidden shadow-md p-1 space-y-1">
                                 <button
                                     class="w-full flex justify-between items-center p-6 text-slate-900 text-left hover:bg-slate-50 transition"
                                     onclick="toggleAccordion(this)">
@@ -68,6 +91,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </section>

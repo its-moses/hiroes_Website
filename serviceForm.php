@@ -28,203 +28,203 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
     <title>Hiroes - Admin Service Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
+    /* body {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         background-color: #f8f9fa;
-    }
+    } */
 
     .form-container {
         background: white;
-        padding: 20px;
+        padding: 24px;
         border-radius: 8px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .table_wrapper {
-        max-height: 300px;
+    /* .table_wrapper {
+        max-height: 800px;
         overflow-y: auto;
         scrollbar-width: none;
         overflow-x: auto;
-    }
+    } */
     </style>
 </head>
 
 <body>
-    <div>
+    <div class="bg-light bg-gradient py-5">
 
-    <!-- SERVICE TABLE AND FORM -->
+        <!-- SERVICE TABLE AND FORM -->
 
-    <section>
-        <div class="container-xxl mb-4">
+        <section>
+            <div class="container-xxl mb-4">
 
-            <!-- FLEX BOX FOR SERVICE FORM AND SERVICE TABLE -->
+                <!-- FLEX BOX FOR SERVICE FORM AND SERVICE TABLE -->
 
-            <div class="row justify-content-center">
+                <div class="row justify-content-center">
 
-                <!-- SERVICE TABLE -->
+                    <!-- SERVICE TABLE -->
 
-                <div class="col-md-8">
-                    <div class="form-container h-100">
-                        <h4 class="text-start pb-3">Service List</h4>
-                        <div class="table_wrapper">
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="col-4">Name</th>
-                                        <th scope="col" class="col-4 d-none d-lg-block w-100">Category</th>
-                                        <th scope="col" class="col-2">Price</th>
-                                        <th scope="col" class="col-2">Status</th>
-                                        <!-- <th scope="col" class="col-2">Description</th> -->
-                                        <!-- <th scope="col">Edit</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody id="servicebody">
-                                    <!-- <tr>
-                                        <th scope="row">AC Deep Cleaning<a href="#"
-                                                class="link-secondary px-2 text-decoration-none">📝</a></th>
-                                        <td class="col-4 d-none d-lg-block w-100">Air Conditioner & Heating</td>
-                                        <td>₹700</td>
-                                        <td>Modified</td>
-                                    </tr> -->
-                                </tbody>
-                            </table>
+                    <div class="col-md-8">
+                        <div class="form-container h-100">
+                            <h4 class="text-start pb-3">Service List</h4>
+                            <div class="table_wrapper">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="col-4">Name</th>
+                                            <th scope="col" class="col-4 d-none d-lg-block w-100">Category</th>
+                                            <th scope="col" class="col-2">Price</th>
+                                            <th scope="col" class="col-2">Status</th>
+                                            <!-- <th scope="col" class="col-2">Description</th> -->
+                                            <!-- <th scope="col">Edit</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="servicebody">
+                                        <!-- <tr>
+                                            <th scope="row">AC Deep Cleaning<a href="#"
+                                                    class="link-secondary px-2 text-decoration-none">📝</a></th>
+                                            <td class="col-4 d-none d-lg-block w-100">Air Conditioner & Heating</td>
+                                            <td>₹700</td>
+                                            <td>Modified</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ADMIN  SERVICE FORM -->
+
+                    <div class="col-md-4">
+                        <div class="form-container">
+                            <h4 class="text-start pb-3">Admin Service Form</h4>
+                            <form id="serviceForm" method="post">
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-select" id="category" required>
+                                        <option value="">Select Category</option>
+                                        <?php
+                                        foreach ($sqlData as $data) { ?>
+                                        <option value="<?= $data['category_name'] ?>"><?= $data['category_name'] ?></option>
+
+
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Category Description</label>
+                                    <p id="description" class="text-md"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="serviceName" class="form-label">Service Name</label>
+                                    <input type="text" class="form-control" id="serviceName" required>
+                                    <small id="servicenameCheckMessage" class="text-danger"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="serviceDescription" class="form-label">Service Description</label>
+                                    <input type="text" class="form-control" id="serviceDescription" required>
+                                </div>
+                                <!-- <div class="mb-3">
+                                        <label for="serviceIcon" class="form-label">Service Icon Name</label>
+                                        <input type="text" class="form-control" id="serviceIcon" required>
+                                    </div> -->
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Service Price</label>
+                                    <input type="number" class="form-control" id="price" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
+                                <a class="btn btn-light w-100 mt-2" href="../hiroes_Website/Config/logout.php">Logout</a>
+                            </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- ADMIN  SERVICE FORM -->
+                <!-- MODAL START -->
 
-                <div class="col-md-4">
-                    <div class="form-container">
-                        <h4 class="text-start pb-3">Admin Service Form</h4>
-                        <form id="serviceForm" method="post">
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Category</label>
-                                <select class="form-select" id="category" required>
-                                    <option value="">Select Category</option>
-                                    <?php
-                                    foreach ($sqlData as $data) { ?>
-                                    <option value="<?= $data['category_name'] ?>"><?= $data['category_name'] ?></option>
-
-
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Category Description</label>
-                                <p id="description" class="text-md"></p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="serviceName" class="form-label">Service Name</label>
-                                <input type="text" class="form-control" id="serviceName" required>
-                                <small id="servicenameCheckMessage" class="text-danger"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="serviceDescription" class="form-label">Service Description</label>
-                                <input type="text" class="form-control" id="serviceDescription" required>
-                            </div>
-                            <!-- <div class="mb-3">
-                                    <label for="serviceIcon" class="form-label">Service Icon Name</label>
-                                    <input type="text" class="form-control" id="serviceIcon" required>
-                                </div> -->
-                            <div class="mb-3">
-                                <label for="price" class="form-label">Service Price</label>
-                                <input type="number" class="form-control" id="price" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
-                            <a class="btn btn-light w-100 mt-2" href="../hiroes_Website/Config/logout.php">Logout</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MODAL START -->
-
-            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="">
-                                <div class="form-container">
-                                    <h4 class="text-start pb-3">Edit Service Form</h4>
-                                    <form id="serviceForm" method="post">
-                                        <div class="mb-3">
-                                            <label for="category" class="form-label">Category</label>
-                                            <select class="form-select" id="edit_category" required>
-                                                <option value="">Select Category</option>
-                                                <?php
-                                                foreach ($sqlData as $data) { ?>
-                                                <option value="<?= $data['category_name'] ?>">
-                                                    <?= $data['category_name'] ?>
-                                                </option>
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="">
+                                    <div class="form-container">
+                                        <h4 class="text-start pb-3">Edit Service Form</h4>
+                                        <form id="serviceForm" method="post">
+                                            <div class="mb-3">
+                                                <label for="category" class="form-label">Category</label>
+                                                <select class="form-select" id="edit_category" required>
+                                                    <option value="">Select Category</option>
+                                                    <?php
+                                                    foreach ($sqlData as $data) { ?>
+                                                    <option value="<?= $data['category_name'] ?>">
+                                                        <?= $data['category_name'] ?>
+                                                    </option>
 
 
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="serviceName" class="form-label">Service Name</label>
-                                            <input type="text" class="form-control" id="edit_serviceName" required>
-                                            <small id="nameCheckMessage" class="text-danger"></small>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="serviceDescription" class="form-label">Service
-                                                Description</label>
-                                            <input type="text" class="form-control" id="edit_serviceDescription"
-                                                required>
-                                        </div>
-                                        <!-- <div class="mb-3">
-                                    <label for="serviceIcon" class="form-label">Service Icon Name</label>
-                                    <input type="text" class="form-control" id="serviceIcon" required>
-                                </div> -->
-                                        <div class="mb-3">
-                                            <label for="price" class="form-label">Service Price</label>
-                                            <input type="number" class="form-control" id="edit_price" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary w-100"
-                                            id="edit_submitBtn">Update</button>
-                                    </form>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="serviceName" class="form-label">Service Name</label>
+                                                <input type="text" class="form-control" id="edit_serviceName" required>
+                                                <small id="nameCheckMessage" class="text-danger"></small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="serviceDescription" class="form-label">Service
+                                                    Description</label>
+                                                <input type="text" class="form-control" id="edit_serviceDescription"
+                                                    required>
+                                            </div>
+                                            <!-- <div class="mb-3">
+                                        <label for="serviceIcon" class="form-label">Service Icon Name</label>
+                                        <input type="text" class="form-control" id="serviceIcon" required>
+                                    </div> -->
+                                            <div class="mb-3">
+                                                <label for="price" class="form-label">Service Price</label>
+                                                <input type="number" class="form-control" id="edit_price" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100"
+                                                id="edit_submitBtn">Update</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
+
+                <!-- MODAL END -->
+        </section>
+
+        <!-- CATEGORIES -->
+
+        <section class="container-xxl">
+            <div class="form-container">
+                <h4 class="text-start pb-3">Categories List</h4>
+                <div class="table_wrapper">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-8">Name</th>
+                                <th scope="col" class="col-2">Items</th>
+                                <th scope="col" class="col-2">Visibility</th>
+                                <!-- <th scope="col">Edit</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="categorybody">
+                            <tr>
+                                <th scope="row">Electrical<a href="#"
+                                        class="link-secondary px-2 text-decoration-none">📝</a></th>
+                                <td>Number of Items</td>
+                                <td>Website</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <!-- MODAL END -->
-    </section>
-
-    <!-- CATEGORIES -->
-
-    <section class="container-xxl">
-        <div class="form-container">
-            <h4 class="text-start pb-3">Categories List</h4>
-            <div class="table_wrapper">
-                <table class="table table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col-8">Name</th>
-                            <th scope="col" class="col-2">Items</th>
-                            <th scope="col" class="col-2">Visibility</th>
-                            <!-- <th scope="col">Edit</th> -->
-                        </tr>
-                    </thead>
-                    <tbody id="categorybody">
-                        <tr>
-                            <th scope="row">Electrical<a href="#"
-                                    class="link-secondary px-2 text-decoration-none">👁️</a></th>
-                            <td>Number of Items</td>
-                            <td>Website</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+        </section>
 
     </div>
     <script>
