@@ -207,8 +207,9 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-6">Name</th>
-                            <th scope="col" class="col-4">Items</th>
+                            <th scope="col" class="col-8">Name</th>
+                            <th scope="col" class="col-2">Items</th>
+                            <th scope="col" class="col-2">Visibility</th>
                             <!-- <th scope="col">Edit</th> -->
                         </tr>
                     </thead>
@@ -217,12 +218,14 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                             <th scope="row">Electrical<a href="#"
                                     class="link-secondary px-2 text-decoration-none">👁️</a></th>
                             <td>Number of Items</td>
+                            <td>Website</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
     </div>
     <script>
     const form = document.getElementById('serviceForm');
