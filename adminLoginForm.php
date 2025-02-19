@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("../hiroes_Website/Config/Database.php");
-require_once("../hiroes_Website/Config/adminLoginLogic.php");
+require_once("../hiroes_Website/Config/dbFunctions.php");
 require_once("../hiroes_Website/Config/justSomeFunction.php");
 
 
@@ -34,7 +34,6 @@ if (isset($_POST["signInBtnSbmt"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hiroes - Admin Login</title>
-    <!-- Load jQuery first -->
     
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">

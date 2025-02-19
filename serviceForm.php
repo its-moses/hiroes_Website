@@ -1,13 +1,16 @@
 <?php
 require_once("./Config/connect-admin.php");
 
-// Prevent browser caching (Important for Back button behavior)
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Expire page immediately
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-// Redirect if user is not logged in
+$dbObj = new Database();
+$categorySql = "SELECT category_name FROM `hiroes_categories` ";
+$sqlMain = $dbObj->queryGet($categorySql);
+$sqlData = $sqlMain['data'];
+
 if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true) {
     header("Location: adminLoginForm.php");
     exit();
@@ -39,6 +42,13 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
+
+        .table_wrapper {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            overflow-x: auto;
+        }
     </style>
 </head>
 
@@ -46,8 +56,9 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
     <div class="container-xxl">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                    <div class="form-container h-100">
-                        <h4 class="text-start pb-3">Service List</h4>
+                <div class="form-container h-100">
+                    <h4 class="text-start pb-3">Service List</h4>
+                    <div class="table_wrapper">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
@@ -55,56 +66,116 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                                     <th scope="col" class="col-4 d-none d-lg-block w-100">Category</th>
                                     <th scope="col" class="col-2">Price</th>
                                     <th scope="col" class="col-2">Status</th>
+                                    <th scope="col" class="col-2">Description</th>
                                     <!-- <th scope="col">Edit</th> -->
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">AC Deep Cleaning<a href="#" class="link-secondary px-2 text-decoration-none">📝</a></th>
+                            <tbody id="servicebody">
+                                <!-- <tr>
+                                    <th scope="row">AC Deep Cleaning<a href="#"
+                                            class="link-secondary px-2 text-decoration-none">📝</a></th>
                                     <td class="col-4 d-none d-lg-block w-100">Air Conditioner & Heating</td>
                                     <td>₹700</td>
                                     <td>Modified</td>
-                                    <!-- <td><button class="btn btn-outline-primary btn-sm">Edit</button></td> -->
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
+                </div>
             </div>
             <div class="col-md-4">
-                    <div class="form-container">
-                        <h4 class="text-start pb-3">Admin Service Form</h4>
-                        <form id="serviceForm">
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Category</label>
-                                <select class="form-select" id="category" required>
-                                    <option value="">Select Category</option>
-                                    <option value="Plumbing">Air Conditioner and Heating</option>
-                                    <option value="Electrical">Vehicle Maintenance</option>
-                                    <option value="Carpentry">General Repair and Services</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Category Description</label>
-                                <p id="description" class="fs-5 text">Just read only content</p>
-                            </div>
-                            <div class="mb-3">
-                                <label for="serviceName" class="form-label">Service Name</label>
-                                <input type="text" class="form-control" id="serviceName" required>
-                            </div>
-                            <!-- <div class="mb-3">
+                <div class="form-container">
+                    <h4 class="text-start pb-3">Admin Service Form</h4>
+                    <form id="serviceForm" method="post">
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" required>
+                                <option value="">Select Category</option>
+                                <?php
+                                foreach ($sqlData as $data) { ?>
+                                    <option value="<?= $data['category_name'] ?>"><?= $data['category_name'] ?></option>
+
+
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Category Description</label>
+                            <p id="description" class="fs-5 text"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serviceName" class="form-label">Service Name</label>
+                            <input type="text" class="form-control" id="serviceName" required>
+                            <small id="servicenameCheckMessage" class="text-danger"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serviceDescription" class="form-label">Service Description</label>
+                            <input type="text" class="form-control" id="serviceDescription" required>
+                        </div>
+                        <!-- <div class="mb-3">
                                 <label for="serviceIcon" class="form-label">Service Icon Name</label>
                                 <input type="text" class="form-control" id="serviceIcon" required>
                             </div> -->
-                            <div class="mb-3">
-                                <label for="price" class="form-label">Service Price</label>
-                                <input type="number" class="form-control" id="price" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
-                            <a class="btn btn-light w-100 mt-2" href="../hiroes_Website/Config/logout.php">Logout</a>
-                        </form>
-                    </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Service Price</label>
+                            <input type="number" class="form-control" id="price" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" id="submitBtn" disabled>Submit</button>
+                        <a class="btn btn-light w-100 mt-2" href="../hiroes_Website/Config/logout.php">Logout</a>
+                    </form>
+                </div>
             </div>
         </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="">
+                            <div class="form-container">
+                                <h4 class="text-start pb-3">Edit Service Form</h4>
+                                <form id="serviceForm" method="post">
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label">Category</label>
+                                        <select class="form-select" id="edit_category" required>
+                                            <option value="">Select Category</option>
+                                            <?php
+                                            foreach ($sqlData as $data) { ?>
+                                                <option value="<?= $data['category_name'] ?>"><?= $data['category_name'] ?>
+                                                </option>
+
+
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="serviceName" class="form-label">Service Name</label>
+                                        <input type="text" class="form-control" id="edit_serviceName" required>
+                                        <small id="nameCheckMessage" class="text-danger"></small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="serviceDescription" class="form-label">Service Description</label>
+                                        <input type="text" class="form-control" id="edit_serviceDescription" required>
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                <label for="serviceIcon" class="form-label">Service Icon Name</label>
+                                <input type="text" class="form-control" id="serviceIcon" required>
+                            </div> -->
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">Service Price</label>
+                                        <input type="number" class="form-control" id="edit_price" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100"
+                                        id="edit_submitBtn">Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     <script>
         const form = document.getElementById('serviceForm');
@@ -125,15 +196,287 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
             input.addEventListener('input', checkInputs);
         });
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            alert('Form submitted successfully!');
-        });
-        window.addEventListener("pageshow", function (event) {
-            if (event.persisted) {
-                location.reload();
+        // form.addEventListener('submit', function (event) {
+        //     event.preventDefault();
+        //     alert('Form submitted successfully!');
+        // });
+        // window.addEventListener("pageshow", function (event) {
+        //     if (event.persisted) {
+        //         location.reload();
+        //     }
+        // });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            // alert("Called")
+            function fillTable() {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        act: 'service_table',
+                    },
+                    url: 'apis/service-data.php',
+                    beforeSend: function () {
+                        $("#servicebody").html('')
+
+                    },
+                    success: function (response) {
+                        if (response.status) {
+                            let responseObj = response.data;
+                            let servicebody = ""
+                            $.each(responseObj, function (index, value) {
+
+                                servicebody += `<tr>
+                                                        <th scope="row">${value.service_name}<a href="#"
+                                                                class="link-secondary px-2 text-decoration-none openModal" data-bs-toggle="modal" data-bs-target="#myModal" data-id=${value.service_id}>📝</a></th>
+                                                                <td class="col-4 d-none d-lg-block w-100">${value.category_name}</td>
+                                                                <td>${value.price}</td>
+                                                                <td>${value.status}</td>
+                                                        <td>${value.service_description}</td>
+                                                    </tr>`;
+                            })
+                            $("#servicebody").append(servicebody)
+                        }
+                    }
+                })
             }
-        });
+            fillTable()
+
+
+            $(document).on('click', "#submitBtn", function (e) {
+
+                e.preventDefault();
+                let serviceName = $("#serviceName").val();
+                let serviceDescription = $("#serviceDescription").val();
+                let price = $("#price").val();
+                let categoryName = $("#category").val();
+                // check confirmation
+                Swal.fire({
+                    icon: 'warning',
+                    title: `Are you confirmed to add the Service Name (${serviceName})?`,
+                    showCancelButton: true,
+                    confirmButtonColor: '#198754',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirm',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // send request to server
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                act: 'addService',
+                                category_name: categoryName,  // Sent category_name
+                                service_description: serviceDescription,  // Sent service_description
+                                price: price,  // Sent price
+                                service_name: serviceName  // Sent service_name
+                            },
+                            url: 'apis/service-data-insert.php',
+                            success: function (response) {
+                                // Handle the response
+                                console.log(response);
+                                let Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                                Toast.fire({
+                                    icon: response.text,
+                                    title: '&nbsp;' + response.msg
+                                }).then(function () {
+                                    fillTable();  // Refresh table data
+                                });
+                            }
+                        });
+
+                    }
+                });
+
+            })
+
+            $("#serviceName").on("keyup", function () {
+                var newServiceName = $(this).val().trim();
+
+                $.ajax({
+                    url: "apis/service-edit.php",
+                    type: "GET",
+                    data: {
+                        act: "check_service_name",
+                        service_name: newServiceName
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.exists) {
+                            $("#servicenameCheckMessage").text("Service name already exists!").css("color", "red");
+                            $("#submitBtn").prop("disabled", true)
+                        } else {
+                            $("#servicenameCheckMessage").text(""); // Clear warning if name is available
+                            $("#submitBtn").prop("disabled", false)
+                        }
+                    },
+                    error: function () {
+                        console.error("AJAX error.");
+                    }
+                });
+            });
+
+
+            $('#category').change(function () {
+                var categoryName = $(this).val();
+
+                if (categoryName) {
+                    $.ajax({
+                        url: 'apis/service-description-data.php',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            act: 'description',
+                            category_name: categoryName
+                        },
+                        success: function (response) {
+                            if (response.status === true) {
+                                let responseObj = response.data;
+                                $('#description').text(responseObj[0].description);
+                            } else {
+                                $('#description').text('No description available.');
+                            }
+                        },
+                        error: function () {
+                            $('#description').text('Error fetching description.');
+                        }
+                    });
+                } else {
+                    $('#description').text('Please select a category.');
+                }
+            });
+
+            var originalServiceName = "";
+            var serviceId =""
+
+            $(document).on("click", ".openModal", function () {
+                serviceId = $(this).data("id");
+                if (serviceId) {
+
+                    $.ajax({
+                        url: "apis/service-edit.php",
+                        type: "GET",
+                        data: {
+                            act: 'edit_service',
+                            id: serviceId
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.status) {
+                                $("#edit_category").val(response.data.category_name);
+                                $("#edit_description").text(response.data.category_description);
+                                $("#edit_serviceName").val(response.data.service_name);
+                                originalServiceName = response.data.service_name;
+                                $("#edit_serviceDescription").val(response.data.service_description);
+                                $("#edit_price").val(response.data.price);
+
+                                // $("#edit_submitBtn").prop("disabled", true);
+                            } else {
+                                alert("Error fetching data.");
+                            }
+                        },
+                        error: function () {
+                            // alert("AJAX error.");
+                        }
+                    });
+                }
+            });
+
+            $(document).on('click', "#edit_submitBtn", function (e) {
+                $("#myModal").modal('hide');
+                e.preventDefault();
+                let serviceName = $("#edit_serviceName").val();
+                let serviceDescription = $("#edit_serviceDescription").val();
+                let price = $("#edit_price").val();
+                let categoryName = $("#edit_category").val();
+                service_id  = serviceId
+                // check confirmation
+                Swal.fire({
+                    icon: 'warning',
+                    title: `Are you confirmed to update the Service Name (${serviceName})?`,
+                    showCancelButton: true,
+                    confirmButtonColor: '#198754',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirm',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        
+                        // send request to server
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                act: 'updateService',
+                                category_name: categoryName,  // Sent category_name
+                                service_description: serviceDescription,  // Sent service_description
+                                price: price,  // Sent price
+                                service_name: serviceName,  // Sent service_name
+                                service_id : service_id
+                            },
+                            url: 'apis/service-data-update.php',
+                            success: function (response) {
+                                let Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                                Toast.fire({
+                                    icon: response.text,
+                                    title: '&nbsp;' + response.msg
+                                }).then(function () {
+                                    fillTable();  // Refresh table data
+                                });
+                            }
+                        });
+
+                    }
+                });
+
+            })
+
+            $("#edit_serviceName").on("keyup", function () {
+                var newServiceName = $(this).val().trim();
+
+                if (newServiceName === originalServiceName || newServiceName === "") {
+                    $("#nameCheckMessage").text(""); // Clear warning if name is unchanged or empty
+                    return;
+                }
+
+                $.ajax({
+                    url: "apis/service-edit.php",
+                    type: "GET",
+                    data: {
+                        act: "check_service_name",
+                        service_name: newServiceName
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.exists) {
+                            $("#nameCheckMessage").text("Service name already exists!").css("color", "red");
+                            $("#edit_submitBtn").prop("disabled", true)
+                        } else {
+                            $("#nameCheckMessage").text(""); // Clear warning if name is available
+                            $("#edit_submitBtn").prop("disabled", false)
+                        }
+                    },
+                    error: function () {
+                        console.error("AJAX error.");
+                    }
+                });
+            });
+        })
+
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
