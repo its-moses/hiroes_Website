@@ -270,12 +270,7 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] != true
                             </tr>
                         </thead>
                         <tbody id="categorybody">
-                            <tr>
-                                <th scope="row">Electrical<a href="#"
-                                        class="link-secondary px-2 text-decoration-none">📝</a></th>
-                                <td>Number of Items</td>
-                                <td>Website</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
