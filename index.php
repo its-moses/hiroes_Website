@@ -21,19 +21,21 @@
 
     <!-- NAVIGATION BAR -->
 
-    <nav class="fixed top-0 left-0 w-full bg-white z-50">
+    <nav class="fixed top-0 left-0 w-full bg-white z-50 border-b border-solid border-slate-200">
         <div class="px-4 sm:px-8 md:px-16">
             <div class="mx-auto max-w-7xl">
                 <div class="flex justify-between items-center h-16">
                     <div class="flex items-center gap-4">
-                        <a href="index.php" class="text-2xl font-bold text-slate-900">Hiroes</a>
-                        <a href="#" class="text-lg text-slate-900">Services</a>
-                        <a href="#" class="text-lg text-slate-900">About</a>
-                        <a href="#" class="text-lg text-slate-900">Contact</a>
+                        <!-- <a href="index.php" class="text-2xl font-bold text-slate-900">Hiroes</a> -->
+                        <a href="#" class="text-sm text-slate-900">Home</a>
+                        <a href="#" class="text-sm text-slate-900">News</a>
+                        <a href="http://localhost/hiroes_website/docs/term-of-use.php" class="text-sm text-slate-900">Term of Use</a>
+                        <a href="#" class="text-sm text-slate-900">Privacy Policy</a>
+                        <a href="#" class="text-sm text-slate-900">Contact</a>
                     </div>
                     <div class="flex gap-3">
                         <a href="#service_section"
-                            class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-base font-medium py-2 px-4 rounded">
+                            class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-sm font-medium py-2 px-4 rounded">
                             <div class="anvil"></div>Find
                             Services
                         </a>
@@ -58,7 +60,7 @@
                 <section id="hero_section">
                     <div class="pt-20 pb-32">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-20">
-                            <div class="hiroes_content_s1 max-w-2xl pt-10">
+                            <div class="max-w-2xl pt-10">
                                 <div class="mb-16">
                                     <h1 class="text-5xl font-bold leading-[1.1] mb-6">Household and Lifestyle Services
                                         to Your Doorstep</h1>
