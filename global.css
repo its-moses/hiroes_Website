@@ -1,0 +1,86 @@
+@import "https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css";
+
+.hiroes-accordion-wrapper {
+    border: 1px solid #e2e8f0; /* slate-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    padding: 0.25rem; /* p-1 */
+  }
+  
+  .hiroes-accordion-wrapper > * {
+    margin-bottom: 0.25rem; /* space-y-1 */
+  }
+  
+  .hiroes-accordion-wrapper > *:last-child {
+    margin-bottom: 0;
+  }
+  
+  .hiroes-accordion-trigger {
+    width: 100%; /* w-full */
+    display: flex; /* flex */
+    justify-content: space-between; /* justify-between */
+    align-items: center; /* items-center */
+    align-content: flex-start; /* align-start (closest match in CSS) */
+    gap: 1rem; /* gap-4 */
+    padding: 0.75rem; /* p-3 */
+    color: #0f172a; /* text-slate-900 */
+    text-align: left; /* text-left */
+    transition: background-color 0.2s ease-in-out; /* transition */
+  
+    /* Responsive padding for md:p-6 */
+    @media (min-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+  
+  .hiroes-accordion-trigger:hover {
+    background-color: #f8fafc; /* hover:bg-slate-50 */
+  }
+  
+  .hiroes-accordion-trigger-text-wrapper {
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    gap: 0.5rem; /* gap-2 */
+    max-width: 100%; /* max-w-full */
+  }
+  
+  /* Responsive max-width for sm:max-w-3/4 */
+  @media (min-width: 640px) {
+    .hiroes-accordion-trigger-text-wrapper {
+      max-width: 75%; /* 3/4 */
+    }
+  }
+  
+  .hiroes-accordion-content {
+    display: none; /* hidden */
+    padding: 0; /* p-0 */
+    background-color: #fff; /* bg-slate-0 (white) */
+    color: #334155; /* text-slate-700 */
+    display: grid; /* grid */
+    grid-template-columns: 1fr; /* grid-cols-1 */
+  
+    /* Responsive grid for md:grid-cols-2 */
+    @media (min-width: 768px) {
+      .hiroes-accordion-content {
+        grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+      }
+    }
+  
+    gap: 0.25rem; /* gap-1 */
+  }
+  
+  .hiroes-accordion-content-child {
+    background-color: #f8fafc; /* bg-slate-50 */
+    border: 1px solid #f1f5f9; /* border-slate-100 */
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    border-radius: 0.375rem; /* rounded-md */
+    padding: 0.75rem 0.75rem; /* p-3 py-3 */
+  
+    /* Responsive padding for md:px-5 */
+    @media (min-width: 768px) {
+      padding-left: 1.25rem; /* md:px-5 */
+      padding-right: 1.25rem;
+    }
+  }
