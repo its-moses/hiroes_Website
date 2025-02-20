@@ -133,9 +133,9 @@
                             <div class="border border-slate-200 rounded-lg overflow-hidden shadow-md p-1 space-y-1"
                                 data-name="component">
                                 <button
-                                    class="w-full flex justify-start align-start gap-6 p-3 md:p-6 text-slate-900 text-left hover:bg-slate-50 transition"
+                                    class="w-full flex justify-start align-start gap-8 p-3 md:p-6 text-slate-900 text-left hover:bg-slate-50 transition cursor-pointer"
                                     onclick="toggleAccordion(this)">
-                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="aspect-square object-cover rounded-lg w-40" alt="">
+                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="aspect-square object-cover rounded-lg w-60" alt="">
                                     <div class="w-full">
                                         <div class="flex flex-col gap-2 max-w-full sm:max-w-3/4 py-1">
                                             <span class="categoryTitle text-2xl font-medium">Accordion Title</span>
@@ -145,6 +145,7 @@
                                                 esse accusantium ad porro voluptates assumenda explicabo corrupti ipsam
                                                 quisquam autem voluptatum. Sed magni quasi animi ipsa non natus? Aliquid,
                                                 officiis. Distinctio error voluptatibus vel expedita suscipit.</p>
+                                            <div class="self-start pt-6 pb-2"><a href="wa.me/9609721301" class="bg-white hover:bg-slate-900 border-solid border-1 border-slate-200 text-black hover:text-white text-base font-medium py-2 px-3 rounded">Enquiry on WhatsApp</a></div>
                                         </div>
                                     </div>
                                     <svg class="self-start hidden sm:block shrink-0 w-6 h-6 transition-transform transform rotate-0"
