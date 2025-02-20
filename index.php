@@ -17,7 +17,7 @@
 
 </style>
 
-<body class="bg-slate-0 position-relative">
+<body class="bg-slate-0 position-relative font-[Inter] subpixel-antialiased">
 
     <!-- NAVIGATION BAR -->
 
@@ -32,7 +32,7 @@
                         <a href="#" class="text-lg text-slate-900">Contact</a>
                     </div>
                     <div class="flex gap-3">
-                        <a href="#"
+                        <a href="#service_section"
                             class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-base font-medium py-2 px-4 rounded">
                             <div class="anvil"></div>Find
                             Services
@@ -87,7 +87,7 @@
 
                 <!-- SECTION SERVICE AND CATEGORY-->
 
-                <section>
+                <section id="service_section">
                     <div class="pt-20 pb-32">
 
                         <!-- SECTION HEADER -->
@@ -95,31 +95,31 @@
                         <div class="hiroes_content_s1 max-w-md pt-10">
                             <div>
                                 <h2 class="text-4xl font-bold leading-[1.1] mb-4">Explore Services & Prices</h2>
-                                <p class="text-xl leading-[1.5]">Hiroes offer a wide range of at-home service
+                                <p class="text-lg leading-[1.5]">Hiroes offer a wide range of at-home service
                                     categories for your household and lifestyle needs.</p>
                             </div>
                         </div>
 
                         <!-- TABS -->
 
-                        <div class="flex flex-row gap-2 overflow-x-auto text-nowrap mt-8 mb-16">
+                        <div class="flex flex-row gap-2 overflow-x-auto text-nowrap mt-12 mb-8">
                             <button
-                                class="tab-btn active-tab cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn active-tab cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(0)">Available</button>
                             <button
-                                class="tab-btn cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(1)">Handyman & Repair</button>
                             <button
-                                class="tab-btn cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(2)">Appliances</button>
                             <button
-                                class="tab-btn cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(3)">Maintenance</button>
                             <button
-                                class="tab-btn cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(4)">Self Care & Wellness</button>
                             <button
-                                class="tab-btn cursor-pointer text-lg font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
+                                class="tab-btn cursor-pointer text-base font-medium py-1 px-4 rounded-full border border-slate-200 bg-slate-0 hover:bg-slate-900 text-slate-900 hover:text-slate-50"
                                 onclick="showTab(5)">Party & Event</button>
                         </div>
 
@@ -133,28 +133,34 @@
                             <div class="border border-slate-200 rounded-lg overflow-hidden shadow-md p-1 space-y-1"
                                 data-name="component">
                                 <button
-                                    class="w-full flex justify-between align-start gap-4 items-center p-3 md:p-6 text-slate-900 text-left hover:bg-slate-50 transition"
+                                    class="w-full flex justify-start align-start gap-6 p-3 md:p-6 text-slate-900 text-left hover:bg-slate-50 transition"
                                     onclick="toggleAccordion(this)">
-                                    <div class="flex flex-col gap-2 max-w-full sm:max-w-3/4">
-                                        <span class="categoryTitle text-xl font-medium">Accordion Title</span>
-                                        <p class="categoryDescription text-base font-normal">Lorem ipsum dolor sit
-                                            amet consectetur adipisicing elit. Eligendi nulla nisi odit iure dolorum
-                                            mollitia, incidunt architecto, sequi quos repudiandae ipsa facilis eaque
-                                            esse accusantium ad porro voluptates assumenda explicabo corrupti ipsam
-                                            quisquam autem voluptatum. Sed magni quasi animi ipsa non natus? Aliquid,
-                                            officiis. Distinctio error voluptatibus vel expedita suscipit.</p>
+                                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="aspect-square object-cover rounded-lg w-40" alt="">
+                                    <div class="w-full">
+                                        <div class="flex flex-col gap-2 max-w-full sm:max-w-3/4 py-1">
+                                            <span class="categoryTitle text-2xl font-medium">Accordion Title</span>
+                                            <p class="categoryDescription text-base font-normal">Lorem ipsum dolor sit
+                                                amet consectetur adipisicing elit. Eligendi nulla nisi odit iure dolorum
+                                                mollitia, incidunt architecto, sequi quos repudiandae ipsa facilis eaque
+                                                esse accusantium ad porro voluptates assumenda explicabo corrupti ipsam
+                                                quisquam autem voluptatum. Sed magni quasi animi ipsa non natus? Aliquid,
+                                                officiis. Distinctio error voluptatibus vel expedita suscipit.</p>
+                                        </div>
                                     </div>
-                                    <svg class="self-start hidden sm:block shrink-0 w-5 h-5 transition-transform transform rotate-0"
+                                    <svg class="self-start hidden sm:block shrink-0 w-6 h-6 transition-transform transform rotate-0"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
                                 <div class="hidden p-0 bg-slate-0 text-slate-700 grid grid-cols-1 md:grid-cols-2 gap-1">
-                                    <div class="serviceCard bg-slate-50 border border-slate-100 flex flex-col rounded-md p-3 md:px-5 py-3">
-                                        <div class="serviceName text-xl font-medium">Service Title</div>
-                                        <div class="servicePrize">Price</div>
-                                        <button class="self-start pt-6 pb-2"><a href="#"
+                                    <div class="serviceCard bg-slate-100 border border-slate-200 flex flex-col rounded-md p-3 md:px-5 py-4">
+                                        <div class="flex justify-between mb-2">
+                                            <div class="serviceName text-xl font-semibold">Service Title</div>
+                                            <div class="servicePrize text-xl font-bold"><span>₹</span>700</div>
+                                        </div>
+                                        <p class="text-base max-w-3/4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur, quam placeat ipsum amet odit accusamus facilis ab aut nesciunt ipsam!</p>
+                                        <button class="self-start pt-8 pb-2"><a href="#"
                                                 class="bg-white hover:bg-slate-900 border-solid border-1 border-slate-200 text-black hover:text-white text-base font-medium py-2 px-3 rounded">Book
                                                 on WhatsApp</a></button>
                                     </div>
