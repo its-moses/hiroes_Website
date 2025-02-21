@@ -10,10 +10,10 @@
     <title>Publiccccc</title>
 </head>
 <style>
-@font-face {
-    font-family: 'LucideIcons';
-    src: url(https://unpkg.com/lucide-static@latest/font/Lucide.ttf) format('truetype');
-}
+    @font-face {
+        font-family: 'LucideIcons';
+        src: url(https://unpkg.com/lucide-static@latest/font/Lucide.ttf) format('truetype');
+    }
 </style>
 
 <body class="bg-slate-0 position-relative font-[Inter] subpixel-antialiased">
@@ -212,10 +212,11 @@
                             </div>
                             <div class="flex gap-3">
                                 <a href="#"
-                                    class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-lg font-medium py-4 px-6 rounded">Open WhatsApp</a>
+                                    class="bg-slate-900 hover:bg-slate-700 border-solid border-1 border-slate-200 text-white text-lg font-medium py-4 px-6 rounded">Open
+                                    WhatsApp</a>
                                 <a href="#"
                                     class="bg-slate-0 hover:bg-slate-200 border-solid border-1 border-slate-200 text-black text-lg font-medium py-4 px-6 rounded">info@hiroes.in</a>
-                            </div>      
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -277,31 +278,87 @@
     <!-- SCRIPTS -->
 
     <script>
-    function toggleAccordion(button) {
-        const answerDiv = button.nextElementSibling;
-        const icon = button.querySelector("svg");
+        function toggleAccordion(button) {
+            const answerDiv = button.nextElementSibling;
+            const icon = button.querySelector("svg");
 
-        if (answerDiv.classList.contains("hidden")) {
-            answerDiv.classList.remove("hidden");
-            icon.classList.add("rotate-180");
-        } else {
-            answerDiv.classList.add("hidden");
-            icon.classList.remove("rotate-180");
+            if (answerDiv.classList.contains("hidden")) {
+                answerDiv.classList.remove("hidden");
+                icon.classList.add("rotate-180");
+            } else {
+                answerDiv.classList.add("hidden");
+                icon.classList.remove("rotate-180");
+            }
         }
-    }
 
-    function showTab(index) {
-        const tabs = document.querySelectorAll(".tab-btn");
-        const contents = document.querySelectorAll(".tab-content");
+        function showTab(index) {
+            const tabs = document.querySelectorAll(".tab-btn");
+            const contents = document.querySelectorAll(".tab-content");
 
-        // Remove active classes from all tabs and hide all content
-        tabs.forEach((tab) => tab.classList.remove("active-tab", "bg-slate-900", "text-white", "shadow-md"));
-        contents.forEach((content) => content.classList.add("hidden"));
+            // Remove active classes from all tabs and hide all content
+            tabs.forEach((tab) => tab.classList.remove("active-tab", "bg-slate-900", "text-white", "shadow-md"));
+            contents.forEach((content) => content.classList.add("hidden"));
 
-        // Add active class to the clicked tab and show its content
-        tabs[index].classList.add("active-tab", "text-white", "bg-slate-900", "shadow-md");
-        contents[index].classList.remove("hidden");
-    }
+            // Add active class to the clicked tab and show its content
+            tabs[index].classList.add("active-tab", "text-white", "bg-slate-900", "shadow-md");
+            contents[index].classList.remove("hidden");
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // $(".category-container").each(function () {
+            //     let categoryDiv = $(this);
+            //     let categoryName = categoryDiv.data("name"); // e.g., "lasun-and-cussing"
+
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "apis/get-category-visibility.php",
+            //         data: { category_name: categoryName },
+            //         dataType: "json",
+            //         success: function (response) {
+            //             if (response.success) {
+            //                 if (response.visibility === "hide") {
+            //                     categoryDiv.hide(); // Hide category if visibility = hide
+            //                 } else {
+            //                     categoryDiv.show();
+            //                 }
+            //             }
+            //         }
+            //     });
+            // });
+
+            function getServices() {
+                $.ajax({
+                    type: "POST",
+                    url: "apis/get-services.php",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            // Loop through categories directly using $.each
+                            $.each(response.services, function (categoryKey, servicesList) {
+                                let categoryDiv = $(`[data-name="${categoryKey}"]`);
+
+                                // Loop through services within the category
+                                $.each(servicesList, function (index, service) {
+                                    let serviceHTML = `
+                                                        <div class="service-item">
+                                                            <h5>${service.service_name}</h5>
+                                                            <p>${service.description}</p>
+                                                            <strong>Price: $${service.price}</strong>
+                                                        </div>
+                    `;
+                                    categoryDiv.append(serviceHTML); // Append service details inside category div
+                                });
+                            });
+                        }
+                    }
+                });
+
+            }
+
+            getServices()
+        });
     </script>
 </body>
 
