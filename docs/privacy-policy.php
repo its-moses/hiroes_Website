@@ -52,7 +52,7 @@
                     <div class="pt-20 pb-28">
                         <div class="max-w-xl">
                             <div>
-                                <h2 class="text-5xl font-bold leading-[1.1]">Terms and Conditions</h2>
+                                <h2 class="text-5xl font-bold leading-[1.1]">Privacy Policy</h2>
                                 <p class="text-base text-slate-400 leading-[1.5] my-4">Last Updated Date</p>
                                 <p class="text-lg text-slate-200 leading-[1.5]">Welcome to our Terms and Conditions page
                                     and here, we
